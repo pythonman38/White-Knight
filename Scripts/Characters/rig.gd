@@ -1,10 +1,16 @@
 extends Node3D
 class_name Rig
 
+signal heavy_attack()
+
 @export var animation_speed: float = 10.0
 
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var playback: AnimationNodeStateMachinePlayback = animation_tree["parameters/playback"]
+@onready var skeleton_3d: Skeleton3D = $CharacterRig/GameRig/Skeleton3D
+@onready var villager_meshes: Array[MeshInstance3D] = [ 
+	$CharacterRig/GameRig/Skeleton3D/Villager_01, $CharacterRig/GameRig/Skeleton3D/Villager_02
+]
 
 var run_path: String = "parameters/MoveSpace/blend_position"
 var run_weight_target: float = -1.0
@@ -18,8 +24,15 @@ func update_animation_tree(direction: Vector3) -> void:
 func travel(animation_name: String) -> void:
 	playback.travel(animation_name)
 	
-func is_idle() -> bool:
-	return playback.get_current_node() == "MoveSpace"
+func is_state(state: String) -> bool:
+	return playback.get_current_node() == state
+	
+func is_overhead() -> bool:
+	return playback.get_current_node() in ["Overhead", "OverheadRecover"]
 
-func is_slashing() -> bool:
-	return playback.get_current_node() == "Slash"
+func set_active_mesh(active_mesh: MeshInstance3D) -> void:
+	for child in skeleton_3d.get_children(): child.visible = false
+	active_mesh.visible = true
+
+func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "Overhead": heavy_attack.emit()

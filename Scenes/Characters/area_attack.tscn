@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyuwlkesyh1dr"]
+
+[ext_resource type="Script" uid="uid://cmr2tmifbluwv" path="res://Scripts/Characters/area_attack.gd" id="1_usnjg"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ysu66"]
+radius = 1.0
+
+[node name="AreaAttack" type="ShapeCast3D"]
+shape = SubResource("CylinderShape3D_ysu66")
+target_position = Vector3(0, 0, 0)
+script = ExtResource("1_usnjg")

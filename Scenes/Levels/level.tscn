@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://cmne3ow0tfgth"]
+[gd_scene load_steps=11 format=3 uid="uid://cmne3ow0tfgth"]
 
 [ext_resource type="PackedScene" uid="uid://cqgine8axlelk" path="res://Scenes/Characters/Player/player.tscn" id="1_f1n8c"]
 [ext_resource type="PackedScene" uid="uid://bjggddu1qfsd2" path="res://Assets/Environment/Rock_Cliff_Env_03.glb" id="2_7x7pb"]
 [ext_resource type="PackedScene" uid="uid://bow3geh2gqatu" path="res://Assets/Environment/Tree_Group_Vege.glb" id="3_yjxcc"]
 [ext_resource type="PackedScene" uid="uid://cdv02eyyjoqyi" path="res://Assets/Environment/Topiary_Tree_Vege_01.glb" id="4_tq1so"]
 [ext_resource type="PackedScene" uid="uid://duhjfjv7wod1i" path="res://Assets/Environment/Bush_Vege_2.glb" id="5_rv5g2"]
+[ext_resource type="PackedScene" uid="uid://belp25krgaful" path="res://Scenes/Characters/Enemy/enemy.tscn" id="6_rv5g2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tyfcb"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -92,7 +93,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 25)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 21)
 
 [node name="Topiary_Tree_Vege_014" parent="Vegetation/Trees" instance=ExtResource("4_tq1so")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, 13)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, 6.99999)
 
 [node name="Bush_Vege_22" parent="Vegetation/Trees" instance=ExtResource("5_rv5g2")]
 transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -7, 0, 31)
@@ -102,3 +103,17 @@ transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 
 
 [node name="Bush_Vege_24" parent="Vegetation/Trees" instance=ExtResource("5_rv5g2")]
 transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, 30, 0, -6)
+
+[node name="Enemies" type="Node3D" parent="."]
+
+[node name="Mike" parent="Enemies" instance=ExtResource("6_rv5g2")]
+transform = Transform3D(-0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, -0.258819, 19, 1, 8)
+
+[node name="Leo" parent="Enemies" instance=ExtResource("6_rv5g2")]
+transform = Transform3D(-0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926, 9, 1, 20)
+
+[node name="Ralph" parent="Enemies" instance=ExtResource("6_rv5g2")]
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 10, 1, 10)
+
+[node name="Don" parent="Enemies" instance=ExtResource("6_rv5g2")]
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 15, 1, 16)
