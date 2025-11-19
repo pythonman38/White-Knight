@@ -9,7 +9,7 @@ var _attack_direction := Vector3.ZERO
 @export var mouse_sensitivity: float = 0.00375
 @export var min_boundary: float = -60.0
 @export var max_boundary: float = 10.0
-@export var animation_decay: float = 20.00
+@export var animation_decay: float = 20.0
 @export var attack_move_speed: float = 3.0
 @export_category("RPG Stats")
 @export var stats: CharacterStats
@@ -22,6 +22,7 @@ var _attack_direction := Vector3.ZERO
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
 @onready var area_attack: ShapeCast3D = $RigPivot/AreaAttack
+@onready var user_interface: Control = $UserInterface
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -29,6 +30,8 @@ func _ready() -> void:
 	stats.level_up_notification.connect(
 		func(): health_component.update_max_health(stats.get_max_hp())
 	)
+	stats.update_stats.connect(user_interface.update_stats_display)
+	user_interface.update_stats_display()
 
 func _physics_process(delta: float) -> void:
 	frame_camera_rotation()

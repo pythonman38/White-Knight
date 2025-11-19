@@ -1,0 +1,105 @@
+[gd_scene load_steps=9 format=3 uid="uid://biusxncv5va0v"]
+
+[ext_resource type="Script" uid="uid://cjlkn3u1vgq4" path="res://Scripts/UI/user_interface.gd" id="1_6q3el"]
+[ext_resource type="Texture2D" uid="uid://cxnr1mn5ga64y" path="res://Assets/UIAssets/Unitframe/HealthBarUnder.png" id="1_j6mn1"]
+[ext_resource type="Texture2D" uid="uid://0im4grpv2egk" path="res://Assets/UIAssets/Unitframe/HealthBarOver.png" id="2_ebjbk"]
+[ext_resource type="Texture2D" uid="uid://de4gp8tpf5c6k" path="res://Assets/UIAssets/Unitframe/MainBar.png" id="3_vhnia"]
+[ext_resource type="FontFile" uid="uid://0qwm4db4tu0h" path="res://Assets/Fonts/LibreCaslonText-Bold.ttf" id="4_763oc"]
+[ext_resource type="Texture2D" uid="uid://b6bli8evlklnu" path="res://Assets/UIAssets/Unitframe/BlueBar.png" id="6_3yokl"]
+[ext_resource type="PackedScene" uid="uid://ble0s8pekpfns" path="res://Scenes/UI/inventory.tscn" id="7_3yokl"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_vhnia"]
+font = ExtResource("4_763oc")
+font_size = 26
+font_color = Color(0.960784, 0.717647, 0.423529, 1)
+
+[node name="UserInterface" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_6q3el")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="InfoBar" type="Control" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HealthBarUnder" type="TextureRect" parent="MarginContainer/InfoBar"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_j6mn1")
+
+[node name="HealthBar" type="TextureProgressBar" parent="MarginContainer/InfoBar/HealthBarUnder"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+texture_progress = ExtResource("3_vhnia")
+
+[node name="HealthLabel" type="Label" parent="MarginContainer/InfoBar/HealthBarUnder/HealthBar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(95, 0)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 103.0
+offset_top = -14.0
+offset_right = 236.0
+offset_bottom = -14.0
+grow_vertical = 2
+text = "1000/1000"
+label_settings = SubResource("LabelSettings_vhnia")
+vertical_alignment = 1
+
+[node name="XPBar" type="TextureProgressBar" parent="MarginContainer/InfoBar/HealthBarUnder"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 348.0
+offset_bottom = 102.0
+value = 100.0
+texture_progress = ExtResource("6_3yokl")
+
+[node name="HealthBarOver" type="TextureRect" parent="MarginContainer/InfoBar"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_ebjbk")
+
+[node name="LevelLabel" type="Label" parent="MarginContainer/InfoBar/HealthBarOver"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(95, 0)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 1.0
+grow_vertical = 2
+text = "999"
+label_settings = SubResource("LabelSettings_vhnia")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Inventory" parent="." instance=ExtResource("7_3yokl")]
+visible = false
+layout_mode = 1

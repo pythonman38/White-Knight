@@ -2,6 +2,7 @@ extends Resource
 class_name CharacterStats
 
 signal level_up_notification()
+signal update_stats()
 
 class Ability:
 	var min_modifier: float
@@ -9,9 +10,9 @@ class Ability:
 	var ability_score: int = 25:
 		set(value): ability_score = clamp(value, 0, 100)
 		
-	func _init(minimum: float, maximum: float) -> void:
-		min_modifier = minimum
-		max_modifier = maximum
+	func _init(min: float, max: float) -> void:
+		min_modifier = min
+		max_modifier = max
 		
 	func percentile_lerp(min_bound: float, max_bound: float) -> float:
 		return lerp(min_bound, max_bound, ability_score / 100.0)
@@ -31,6 +32,7 @@ var xp := 0:
 			xp -= boundary
 			level_up()
 			boundary = percentage_level_up_boundary()
+		update_stats.emit()
 
 const MIN_DASH_COOLDOWN := 1.5
 const MAX_DASH_COOLDOWN := 0.5
