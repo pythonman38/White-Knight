@@ -8,9 +8,11 @@ signal heavy_attack()
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var playback: AnimationNodeStateMachinePlayback = animation_tree["parameters/playback"]
 @onready var skeleton_3d: Skeleton3D = $CharacterRig/GameRig/Skeleton3D
-@onready var villager_meshes: Array[MeshInstance3D] = [ 
-	$CharacterRig/GameRig/Skeleton3D/Villager_01, $CharacterRig/GameRig/Skeleton3D/Villager_02
-]
+@onready var shield_slot: Node3D = %ShieldSlot
+@onready var weapon_slot: Node3D = %WeaponSlot
+@onready var villager_01: MeshInstance3D = $CharacterRig/GameRig/Skeleton3D/Villager_01
+@onready var villager_02: MeshInstance3D = $CharacterRig/GameRig/Skeleton3D/Villager_02
+@onready var villager_meshes: Array[MeshInstance3D] = [ villager_01, villager_02 ]
 
 var run_path: String = "parameters/MoveSpace/blend_position"
 var run_weight_target: float = -1.0
@@ -36,3 +38,8 @@ func set_active_mesh(active_mesh: MeshInstance3D) -> void:
 
 func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "Overhead": heavy_attack.emit()
+
+func replace_equipment(scene: PackedScene, slot: Node3D) -> void:
+	for child in slot.get_children(): child.queue_free()
+	var new_equipment := scene.instantiate()
+	slot.add_child(new_equipment)

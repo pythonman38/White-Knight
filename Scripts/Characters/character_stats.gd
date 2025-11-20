@@ -10,9 +10,9 @@ class Ability:
 	var ability_score: int = 25:
 		set(value): ability_score = clamp(value, 0, 100)
 		
-	func _init(min: float, max: float) -> void:
-		min_modifier = min
-		max_modifier = max
+	func _init(min_ability: float, max_ability: float) -> void:
+		min_modifier = min_ability
+		max_modifier = max_ability
 		
 	func percentile_lerp(min_bound: float, max_bound: float) -> float:
 		return lerp(min_bound, max_bound, ability_score / 100.0)
